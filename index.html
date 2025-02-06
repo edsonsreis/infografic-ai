@@ -126,6 +126,11 @@
             <i>Recrutamento e Seleção</i>
         </a>
     </div>
+
+
+
+
+
     <img class="logo" src="images/logo-senior.png">
 
     <div class="overlay"></div>
@@ -237,7 +242,6 @@
 
 
 
-        
 
 
 
@@ -504,11 +508,9 @@
                 </div>
             </div>
         </div>
-        
+  
 
-
-
-        <div class="modal_item">
+        <div class="modal_item" id="recrutamentoModal">
             <div class="modal_item_header" style="background:#1E9988;">
                 HCM
                 <img src="images/icon-erp.svg" alt="Ícone ERP">
@@ -517,61 +519,138 @@
             <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
-                    <h2>A Transformação no Recrutamento e Seleção com Aderência Sugerida </h2>
+                    <h2>A Transformação no Recrutamento e Seleção com Aderência Sugerida</h2>
                     <p>Mariana, gestora de RH, enfrentava dificuldades para filtrar candidatos e encontrar o melhor ajuste para as vagas. Ela descobriu o módulo <strong>Gestão de Recrutamento e Seleção</strong> da Senior, que oferecia uma gestão completa do processo seletivo, desde a abertura de vagas até a efetivação dos candidatos.</p>
                     <p>O grande diferencial foi a ferramenta <strong>aderência sugerida</strong> do <strong>iAssist</strong>, que utiliza Inteligência Artificial para calcular automaticamente o quanto as competências do candidato combinavam com a descrição da vaga. Isso ajudou Mariana a selecionar os candidatos mais alinhados rapidamente, melhorando a assertividade e reduzindo o tempo de triagem.</p>
                     <p><strong>Resultado?</strong> Processos de seleção mais ágeis e assertivos, com contratações mais qualificadas.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8063&idcatalogo=4076&idcurso=12641&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
                 </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img id="expandImage" src="images/13-ia-img-aderencia.png" alt="Descrição de vaga" style="width: 100%; max-width: 500px; height: auto; cursor: pointer;">
+                <!-- Imagem e botão de vídeo -->
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                    <img src="images/13-ia-img-aderencia.png" alt="Descrição de vaga" style="width: 100%; max-width: 500px; height: auto;">
+                    <button id="openVideoButton" style="margin-top: 10px; background: #1E9988; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        Assistir Vídeo
+                    </button>
                 </div>
             </div>
         </div>
         
-        <!-- Modal para exibição da imagem -->
-        <div id="imageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 1000;">
-            <img id="modalImage" src="" alt="Imagem ampliada" style="max-width: 90%; max-height: 90%; cursor: pointer;">
+<!-- Modal para exibição do vídeo -->
+<div id="videoModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center; z-index: 1000;">
+    <div style="position: relative; display: flex; justify-content: center; align-items: center;">
+        <!-- Botão de Fechar no canto superior direito -->
+        <div style="position: absolute; top: 10px; right: 10px; z-index: 1100;">
+            <button id="closeButton" style="background-color: rgba(255,0,0,0.5); color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">
+                Fechar
+            </button>
         </div>
-        
-        <script>
-            const expandImage = document.getElementById('expandImage');
-            const imageModal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-        
-            // Alternar estado de exibição do modal ao clicar na imagem
-            expandImage.addEventListener('click', () => {
-                if (imageModal.style.display === 'none' || imageModal.style.display === '') {
-                    imageModal.style.display = 'flex';
-                    modalImage.src = expandImage.src; // Exibe a imagem clicada no modal
-                }
-            });
-        
-            // Fechar o modal ao clicar na imagem ampliada
-            modalImage.addEventListener('click', () => {
-                imageModal.style.display = 'none';
-            });
-        </script>
-        <script>
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) { return; }
-                js = d.createElement(s); js.id = id;
-                js.src = "https://cdn.tecnologia.senior.com.br/platform/botfactory/conversation/production/bundle.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'botfactory-sdk'));
-            (function () {
-                window.onload = function () {
-                    window.BotFactory.init({
-                        appKey: "KzkXRkbqS0aJNeii6h34d/WuMGbL1gLDLOtJJ64xQWovlpgCTOqgEJs15J4mn87JMINdeNstWYSmQHjHzvcNLg==",
-                        restUrl: "https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/"
-                    });
-                }
-            })();
-        </script>
-
+        <!-- Vídeo com aumento de 25% -->
+        <video id="modalVideo" controls style="width: 125%; height: 125%; transition: all 0.3s;">
+            <source src="images/video-IARH.mp4" type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+        </video>
     </div>
+</div>
+
+
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openVideoButton = document.getElementById('openVideoButton');
+            const videoModal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const recrutamentoModal = document.getElementById('recrutamentoModal'); // Modal "Recrutamento e Seleção"
+            const pauseButton = document.getElementById('pauseButton');
+            const closeButton = document.getElementById('closeButton');
+            let videoStarted = false; // Variável para controlar se o vídeo foi iniciado
+        
+            // Função para abrir o modal e iniciar o vídeo
+            const openVideo = () => {
+                videoModal.style.display = 'flex'; // Exibe o modal
+                modalVideo.currentTime = 0; // Começa o vídeo do início
+                modalVideo.play(); // Inicia o vídeo
+                videoStarted = true; // Marca que o vídeo foi iniciado
+            };
+        
+            // Função para fechar o modal e interromper o vídeo
+            const closeVideo = () => {
+                modalVideo.pause(); // Interrompe o vídeo
+                modalVideo.currentTime = 0; // Reseta o vídeo
+                videoModal.style.display = 'none'; // Fecha o modal
+                videoStarted = false; // Marca que o vídeo foi interrompido
+            };
+        
+            // Abrir ou interromper o vídeo ao clicar no botão
+            openVideoButton.addEventListener('click', () => {
+                if (videoStarted) {
+                    closeVideo(); // Se o vídeo já foi iniciado, fecha e pausa
+                } else {
+                    openVideo(); // Se o vídeo não foi iniciado, abre e começa
+                }
+            });
+        
+            // Fechar o modal e interromper o vídeo ao clicar fora do vídeo dentro do modal "Recrutamento"
+            recrutamentoModal.addEventListener('click', (event) => {
+                if (event.target !== openVideoButton && !videoModal.contains(event.target)) {
+                    closeVideo(); // Fecha o modal e interrompe o vídeo se clicar dentro do modal "Recrutamento"
+                }
+            });
+        
+            // Fechar o modal e interromper o vídeo ao clicar fora do vídeo
+            videoModal.addEventListener('click', (event) => {
+                if (event.target === videoModal) {
+                    closeVideo(); // Fecha o modal e interrompe o vídeo
+                }
+            });
+        
+            // Pausar o vídeo ao clicar no botão de pausar
+            pauseButton.addEventListener('click', () => {
+                if (!modalVideo.paused) {
+                    modalVideo.pause(); // Pausa o vídeo
+                } else {
+                    modalVideo.play(); // Reproduz o vídeo
+                }
+            });
+        
+            // Fechar o modal e interromper o vídeo ao clicar no botão de fechar
+            closeButton.addEventListener('click', () => {
+                closeVideo(); // Fecha o modal e interrompe o vídeo
+            });
+        
+            // Adicionar um evento de clique global na página
+            document.addEventListener('click', (event) => {
+                // Verifica se o vídeo foi iniciado e se o clique foi fora do modal de vídeo e do modal "Recrutamento"
+                if (videoStarted && !videoModal.contains(event.target) && !recrutamentoModal.contains(event.target) && event.target !== openVideoButton) {
+                    closeVideo(); // Fecha o modal e interrompe o vídeo
+                }
+            });
+        });
+        </script>
+        
+        
+        
+    </div>
+
+
+
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://cdn.tecnologia.senior.com.br/platform/botfactory/conversation/production/bundle.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'botfactory-sdk'));
+        (function () {
+            window.onload = function () {
+                window.BotFactory.init({
+                    appKey: "KzkXRkbqS0aJNeii6h34d/WuMGbL1gLDLOtJJ64xQWovlpgCTOqgEJs15J4mn87JMINdeNstWYSmQHjHzvcNLg==",
+                    restUrl: "https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/"
+                });
+            }
+        })();
+    </script>
+
 
     <script src="jquery.js"></script>
     <script src="scripts.js"></script>

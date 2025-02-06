@@ -399,6 +399,17 @@ h1:before {
     margin-bottom: 40px;
 }
 
+.modal_item_content a {
+    display: inline-block;
+    color: #1E9988;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    margin-right: 1.5rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
 .modal_item_content h2 {
     font-size: 48px;
     font-weight: 700;
@@ -448,6 +459,25 @@ h1:before {
     background:#FF8200;
 }
 
+       /* Estilos para o modal */
+       #videoModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    #videoModal video {
+        width: 80%;  /* Ajuste o tamanho do vídeo */
+        height: auto;
+    }
+
 @media(max-width:1199px){
     .modal_item_content_item {
         flex: 0 0 calc(33.33% - 13.33px);
@@ -461,6 +491,9 @@ h1:before {
         flex: 0 0 100%;
     }
 }
+
+
+
 
 @media(max-width:991px){
     .modal_item_content_item {
@@ -522,4 +555,6 @@ h1:before {
         padding:24px;
         justify-content: flex-start;
     }
+
+
 }
