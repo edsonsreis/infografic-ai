@@ -477,103 +477,100 @@ h1:before {
         width: 80%;  /* Ajuste o tamanho do vídeo */
         height: auto;
     }
-
-@media(max-width:1199px){
-    .modal_item_content_item {
-        flex: 0 0 calc(33.33% - 13.33px);
-    }
-
-    .modal_item_content_item.big {
-        flex: 0 0 100%;
+    @media (max-width: 1199px) {
+        .modal_item_content_item {
+            flex: 0 0 33.33%;
+        }
+    
+        .modal_item_content_item.big,
+        .modal_item_content_item.medium {
+            flex: 0 0 100%;
+        }
     }
     
-    .modal_item_content_item.medium {
-        flex: 0 0 100%;
+    @media (max-width: 991px) {
+        .modal_item_content_item {
+            flex: 0 0 50%;
+        }
+    
+        .modal_item_header {
+            font-size: 18px;
+            font-weight: 700;
+        }
+    
+        .modal_item_header img {
+            width: 40px;
+        }
+    
+        .modal_item_content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #33456B;
+            line-height: 100%;
+            margin-bottom: -20px;
+        }
+    
+        .modal_item_content p {
+            font-size: 16px;
+            line-height: 140%;
+            color: #33456B;
+            margin-bottom: 40px;
+        }
+    
+        .modal_item:before {
+            content: '';
+            width: 100px;
+            height: 20px;
+        }
+    
+        .modal_item:after {
+            content: '';
+            width: 72px;
+            height: 2px;
+            position: absolute;
+            background: #FF8200;
+            left: 24px;
+            bottom: 80px;
+        }
     }
-}
-
-
-
-
-@media (max-width: 1199px) {
-    .modal_item_content_item {
-        flex: 0 0 calc(33.33% - 13.33px);
+    
+    @media (max-width: 767px) {
+        .modal {
+            padding: 10px;
+        }
+    
+        .modal_item_content_item {
+            flex: 0 0 100%;
+            min-height: 0px;
+        }
+    
+        .modal_item_header {
+            padding: 24px;
+            padding-right: 100px;
+        }
+    
+        .modal_item_content {
+            padding: 24px;
+            justify-content: flex-start;
+        }
     }
-
-    .modal_item_content_item.big {
-        flex: 0 0 100%;
+    
+    /* Ajustes específicos para iPhone 15 e dispositivos menores */
+    @media (max-width: 400px) {
+        .modal_item_content_item {
+            flex: 0 0 100%;
+        }
+    
+        .modal_item_header {
+            font-size: 16px;
+        }
+    
+        .modal_item_content h2 {
+            font-size: 28px;
+        }
+    
+        .modal_item_content p {
+            font-size: 14px;
+        }
     }
-
-    .modal_item_content_item.medium {
-        flex: 0 0 100%;
-    }
-}
-
-@media (max-width: 991px) {
-    .modal_item_content_item {
-        flex: 0 0 calc(50% - 10px);
-    }
-
-    .modal_item_header {
-        font-size: 18px;
-        font-weight: 700;
-    }
-
-    .modal_item_header img {
-        width: 40px;
-    }
-
-    .modal_item_content h2 {
-        font-size: 32px;
-        font-weight: 700;
-        color: #33456B;
-        line-height: 100%;
-        padding: 0px;
-        margin: 0px;
-        margin-bottom: -20px;
-    }
-
-    .modal_item_content p {
-        font-size: 16px;
-        line-height: 140%;
-        color: #33456B;
-        margin-bottom: 40px;
-    }
-
-    .modal_item:before {
-        content: '';
-        width: 100px;
-        height: 20px;
-    }
-
-    .modal_item:after {
-        content: '';
-        width: 72px;
-        height: 2px;
-        position: absolute;
-        background: #FF8200;
-        left: 24px;
-        bottom: 80px;
-    }
-}
-
-@media (max-width: 767px) {
-    .modal {
-        padding: 10px;
-    }
-
-    .modal_item_content_item {
-        flex: 0 0 100%;
-        min-height: 0px;
-    }
-
-    .modal_item_header {
-        padding: 24px;
-        padding-right: 100px;
-    }
-
-    .modal_item_content {
-        padding: 24px;
-        justify-content: flex-start;
-    }
-}
+    
