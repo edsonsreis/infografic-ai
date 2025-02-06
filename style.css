@@ -574,3 +574,15 @@ h1:before {
         }
     }
     
+    @media (max-width: 767px) {
+        #openVideoButton {
+            order: -1; /* Move o botão para cima da imagem */
+            margin-bottom: 10px; /* Adiciona um espaçamento entre o botão e a imagem */
+        }
+    
+        #videoContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
