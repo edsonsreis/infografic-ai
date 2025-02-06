@@ -151,7 +151,8 @@
         <!-- Texto à esquerda -->
         <div style="flex: 2;">
             <h2>Atraia os Melhores Talentos com a Solução da Senior</h2>
-            <p>Fernanda, gestora de RH de uma empresa em crescimento, enfrentava dificuldades para preencher uma vaga importante. O mercado estava competitivo e a descrição da vaga não atraía os candidatos ideais. Foi então que ela descobriu o módulo <strong>Gestão de Recrutamento e Seleção</strong> da solução <strong>Gestão de Pessoas | HCM da Senior</strong> e a ferramenta <strong>iAssist</strong>, que usa Inteligência Artificial para otimizar a criação de descrições de vaga.</p>
+            <br>
+            <p>Fernanda, gestora de RH de uma empresa em crescimento, enfrentava dificuldades para preencher uma vaga importante. O mercado estava competitivo e a descrição da vaga não atraía os candidatos ideais. Foi então que ela descobriu o módulo <strong>Gestão de Recrutamento e Seleção da Senior</strong> e a ferramenta <strong>iAssist</strong>, que usa Inteligência Artificial para otimizar a criação de descrições de vaga.</p>
             <p>Com o uso do iAssist, Fernanda gerou uma descrição mais atraente e alinhada às necessidades do mercado. O resultado foi uma redução no tempo de contratação, com candidatos mais qualificados e entrevistas mais objetivas.</p>                    
             <a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8062&idcatalogo=4076&idcurso=12640&buscaSimples=true" target="_blank">Acesse o curso na UCS</a>
             <br>
@@ -162,7 +163,7 @@
         </div>
         <!-- Imagens à direita -->
         <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-            <img id="expandImage" src="images/1-ia-img-recruta-descricao-infografico.png" alt="Descrição de vaga 1" style="width: 100%; max-width: 500px; height: auto; cursor: pointer; margin-bottom: 10px;">
+            <img id="expandImage" src="images/recruta4.png" alt="Descrição de vaga 1" style="width: 100%; max-width: 500px; height: auto; cursor: pointer; margin-bottom: 10px;">
             <!-- Botão de seta usando Font Awesome -->
             <button id="nextImageButton" style="background-color: transparent; border: none; cursor: pointer;">
                 <i id="arrowIcon" class="fas fa-arrow-right" style="font-size: 30px;"></i> <!-- Ícone de seta -->
@@ -179,30 +180,32 @@
 
 <!-- Modal para exibição da imagem -->
 <div id="imageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 1000;">
-    <img id="modalImage" src="images/1-ia-img-recruta-descricao-infografico.png" alt="Descrição de vaga" style="max-width: 90%; max-height: 90%; cursor: pointer;">
+    <img id="modalImage" src="images/recruta4.png" alt="Descrição de vaga" style="max-width: 90%; max-height: 90%; cursor: pointer;">
 </div>
 
 <script>
-    const expandImage = document.getElementById('expandImage');
-    const imageModal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    const nextImageButton = document.getElementById('nextImageButton');
-    const arrowIcon = document.getElementById('arrowIcon');
-    const audioButton = document.getElementById('audioButton');
-    const audioDescription = document.getElementById('audioDescription');
-
     // Variáveis de imagens
     const images = [
+        "images/recruta4.png",
+        "images/1-ia-img-recruta-descricao.png",
+        "images/recruta3.png",
         "images/1-ia-img-recruta-descricao-infografico.png",
-        "images/1-ia-img-recruta-descricao.png"
+        "images/recruta5.png"
     ];
+
     let currentImageIndex = 0;
+
+    // Elementos do DOM
+    const expandImage = document.getElementById('expandImage');
+    const modalImage = document.getElementById('modalImage');
+    const prevImageButton = document.getElementById('prevImageButton');
+    const nextImageButton = document.getElementById('nextImageButton');
 
     // Alternar estado de exibição do modal ao clicar na imagem
     expandImage.addEventListener('click', () => {
         if (imageModal.style.display === 'none' || imageModal.style.display === '') {
             imageModal.style.display = 'flex';
-            modalImage.src = expandImage.src; // Exibe a imagem inicial no modal
+            modalImage.src = expandImage.src;
         } else {
             imageModal.style.display = 'none';
         }
@@ -213,21 +216,24 @@
         imageModal.style.display = 'none';
     });
 
-    // Trocar a imagem ao clicar na seta
+    // Trocar a imagem para a PRÓXIMA ao clicar na seta direita
     nextImageButton.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex + 1) % images.length; // Altera o índice de imagem
-        expandImage.src = images[currentImageIndex]; // Troca a imagem mostrada
-        modalImage.src = expandImage.src; // Atualiza a imagem no modal
-
-        // Alternar a seta
-        if (currentImageIndex === 0) {
-            arrowIcon.classList.remove('fa-arrow-left');
-            arrowIcon.classList.add('fa-arrow-right'); // Muda para seta direita
-        } else {
-            arrowIcon.classList.remove('fa-arrow-right');
-            arrowIcon.classList.add('fa-arrow-left'); // Muda para seta esquerda
-        }
+        currentImageIndex = (currentImageIndex + 1) % images.length; // Avança no array
+        updateImage();
     });
+
+    // Trocar a imagem para a ANTERIOR ao clicar na seta esquerda
+    prevImageButton.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length; // Volta no array
+        updateImage();
+    });
+
+    // Atualiza a imagem na tela e no modal
+    function updateImage() {
+        expandImage.src = images[currentImageIndex];
+        modalImage.src = expandImage.src;
+    }
+
 
     // Reproduzir ou pausar o áudio ao clicar no botão
     audioButton.addEventListener('click', () => {
@@ -255,6 +261,7 @@
         <!-- Texto à esquerda -->
         <div style="flex: 2;">
             <h2>Como criar um PDI com o uso de IA</h2>
+            <br>
             <p>O módulo Gestão de Desempenho tem o objetivo de direcionar os objetivos individuais e estratégicos, contribuindo para: mensurar o desempenho de colaboradores, identificar as necessidades de capacitação e de adequação funcional, estimular o diálogo e o reconhecimento através do processo de feedback, contribuir para o desenvolvimento de gestores em relação à evolução das equipes.</p>
             <p>A criação de um plano de desenvolvimento individual é importante para buscarmos o crescimento profissional dentro da empresa que estamos vinculados. A definição de objetivos e ações práticas é importante para que sejamos protagonistas no desenvolvimento de nossas competências.</p>
             <p>Procurando impulsionar a carreira, com a ferramenta de Inteligência Artificial do IAssist, você recebe sugestões de objetivos e ações mediante a definição de uma ou mais competências para montar seu PDI.</p>
@@ -317,6 +324,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[ERP] I.A - AgrodataLake: Centralizando informações de mercado para decisões inteligentes</h2>
+                    <br>
                     <p>A capacidade de tomar decisões com base em dados é fundamental para o sucesso das empresas na atualidade, incluindo o setor do Agronegócio.</p>
                     <p>Como base nesta afirmação, apresentamos o <strong>Agro DataLake</strong>, um recurso centralizado projetado para a consulta de informações relacionadas ao Agronegócio. Este sistema inovador busca dados provenientes de várias fontes, consolidando-os em um único local. Esse processo simplificado facilita significativamente a tomada de decisões pelas empresas, proporcionando uma visão holística e integrada para orientar estrategicamente suas ações.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8054&idcatalogo=4076&idcurso=12632&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
@@ -339,6 +347,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[ERP] I.A - Como o Analytics de Obra pode tornar a tomada de decisão mais rápida e assertiva</h2>
+                    <br>
                     <p>O <strong>Analytics de Obra</strong> é uma ferramenta que fornece ao responsável pela obra uma gestão eficiente, ágil e precisa em uma única tela, detalhando os processos da obra, controlando os custos e prazos através da evolução do orçamento, evitando assim desperdícios e imprevistos.</p>
                     <p><strong>Resultado?</strong> Processos de gestão de obra mais rápidos e assertivos, com controle eficiente de custos e prazos.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8057&idcatalogo=4076&idcurso=12635&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
@@ -362,6 +371,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[ERP] I.A - Geração de campanhas inteligentes utilizando a IA do CRM Senior</h2>
+                    <br>
                     <p>Automatize, reduza custos e tempo de produção. Planeje, controle e explore a indústria 4.0 com MES, cloud, cybersecurity e integração entre sistemas. Ganhe eficiência e competitividade.</p>
                     <p><strong>Resultado?</strong> Campanhas mais inteligentes e eficientes, com redução de custos e aumento de competitividade.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8058&idcatalogo=4076&idcurso=12636&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
@@ -385,6 +395,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[ERP] I.A - Analisando os resultados das Safras com o Gestão Safra</h2>
+                    <br>
                     <p>Como podemos analisar o resultado de uma Safra utilizando o Gestão Safra? O <strong>Gestão de Safra</strong> é uma ferramenta de análise gerencial que se baseia em informações contáveis, financeiras e operacionais, que permite dar visibilidade ao ciclo produtivo de variadas culturas. Ele apresenta informações relevantes sobre a safra, facilitando assim a tomada de decisão.</p>
                     <p><strong>Resultado?</strong> Análises mais precisas e assertivas para otimizar os processos produtivos e melhorar a gestão das safras.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8055&idcatalogo=4076&idcurso=12633&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
@@ -408,6 +419,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[ERP] I.A - Insights ERP XT: O ERP falando com você</h2>
+                    <br>
                     <p>Esta ferramenta desempenha um papel fundamental na otimização de processos e na redução de riscos operacionais. O <strong>Insight do ERP XT</strong> atua de maneira proativa, destacando pontos críticos nas rotinas administrativas e oferecendo ferramentas para aprimorar a eficiência operacional.</p>
                     <p><strong>Resultado?</strong> Processos administrativos mais ágeis e uma gestão mais eficaz com insights poderosos diretamente no seu ERP.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8059&idcatalogo=4076&idcurso=12637&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
@@ -432,6 +444,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>Analytics ERP</h2>
+                    <br>
                     <p><strong>Analytics ERP</strong> serve como uma central para monitorar e gerenciar sua operação. De maneira intuitiva e descomplicada, permite que os usuários-chave e gestores obtenham uma visão abrangente da saúde operacional, capacitando-os a tomar decisões ainda mais precisas.</p>
                     <p>São 8 painéis de indicadores disponibilizados para auxiliar sua gestão de Compras, Contábil, Faturamento, Financeiro, Fiscal, Gerencial, Produção e Vendas. Para cada painel, há indicadores específicos que apoiam uma gestão orientada por dados. No painel Contábil, você pode utilizar a Inteligência Artificial para te auxiliar na análise financeira.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8056&idcatalogo=4076&idcurso=12634&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
@@ -454,6 +467,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[ERP] I.A - Marketing Intelligence: Transforme insights em receitas e alavanque as suas vendas</h2>
+                    <br>
                     <p>Essa solução não só aprimora a busca pelo cliente ideal, mas também facilita a exportação de informações para ferramentas-chave, como Microsoft Excel e o CRM da Senior.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8060&idcatalogo=4076&idcurso=12638&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
                 </div>
@@ -476,6 +490,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[LOGÍSTICA] I.A - AI logistics: Utilizando a Inteligência artificial para potencializar a sua operação de Armazenagem e transporte</h2>
+                    <br>
                     <p>Veja como simplificar o acompanhamento das operações, através de dashboards visuais e análise de dados por meio de inteligência artificial. Com uma interface intuitiva, o AI Logistics é uma solução indispensável para gestores e equipes logísticas que buscam aprimorar sua eficiência e competitividade.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8064&idcatalogo=4076&idcurso=12642&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
                 </div>
@@ -499,6 +514,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>[LOGÍSTICA] I.A - Como a IA pode ajudar a obter insights sobre os dados do armazém</h2>
+                    <br>
                     <p>A Senior oferece soluções logísticas integradas e sincronizadas com seu ERP, revolucionando o agendamento de carga, eliminando erros e fraudes, e monitorando a frota em tempo real. Simplificamos a administração e aprimoramos a gestão de armazéns, garantindo precisão no estoque. Concentre-se no crescimento enquanto cuidamos dos detalhes operacionais.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8065&idcatalogo=4076&idcurso=12643&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
                 </div>
@@ -520,6 +536,7 @@
                 <!-- Texto à esquerda -->
                 <div style="flex: 2;">
                     <h2>A Transformação no Recrutamento e Seleção com Aderência Sugerida</h2>
+                    <br>
                     <p>Mariana, gestora de RH, enfrentava dificuldades para filtrar candidatos e encontrar o melhor ajuste para as vagas. Ela descobriu o módulo <strong>Gestão de Recrutamento e Seleção</strong> da Senior, que oferecia uma gestão completa do processo seletivo, desde a abertura de vagas até a efetivação dos candidatos.</p>
                     <p>O grande diferencial foi a ferramenta <strong>aderência sugerida</strong> do <strong>iAssist</strong>, que utiliza Inteligência Artificial para calcular automaticamente o quanto as competências do candidato combinavam com a descrição da vaga. Isso ajudou Mariana a selecionar os candidatos mais alinhados rapidamente, melhorando a assertividade e reduzindo o tempo de triagem.</p>
                     <p><strong>Resultado?</strong> Processos de seleção mais ágeis e assertivos, com contratações mais qualificadas.</p>
@@ -650,6 +667,8 @@
             }
         })();
     </script>
+
+
 
 
     <script src="jquery.js"></script>
