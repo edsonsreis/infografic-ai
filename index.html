@@ -127,6 +127,111 @@
         </a>
     </div>
 
+ <!-- Container de ícones -->
+<div class="audio-icons-container">
+    <!-- Ícone da playlist -->
+    <div class="playlist-icon" id="playlistIcon">
+        <div></div>
+    </div>
+
+    <!-- Botão Playlist -->
+    <button class="playlist-button" id="playlistButton">Playlist</button>
+
+    <!-- Lista de áudios -->
+    <div class="audio-list" id="audioList">
+        <button id="audio12">HCM - Aderencia Sugerida</button>
+        <button id="audio1">HCM - Descrição da Vaga</button>
+        <button id="audio2">HCM - Desempenho PDI</button>
+        <button id="audio3">Agro - DataLake</button>
+        <button id="audio4">ERP - Analytics de Obra</button>
+        <button id="audio5">ERP - CRM</button>
+        <button id="audio6">ERP - Gestão de Safras</button>
+        <button id="audio7">ERP - Insights ERP</button>
+        <button id="audio8">ERP - Analytics ERP</button>
+        <button id="audio9">ERP - Marketing Intelligence</button>
+        <button id="audio10">Log - AI Logistics</button>
+        <button id="audio11">Log - Plataforma de Fretes</button>
+    </div>
+
+    <!-- Contêiner para ícone do diretor e texto "HG FALA" -->
+    <div class="director-container">
+        <!-- Ícone do diretor -->
+        <div class="audio-icon" id="directorIcon">
+            <img src="images/HG3.png" alt="Diretor">
+        </div>
+
+        <!-- Texto e ícone "HG FALA" -->
+        <div class="director-info">
+            <span>🔊</span>
+            <span>HG FALA</span>
+        </div>
+    </div>
+</div>
+
+<!-- Áudio do diretor -->
+<audio id="directorAudio" src="AudioHG/HG-Fala.mp3"></audio>
+
+<!-- Áudios da playlist -->
+<audio id="audio1File" src="AudioHG/HG-DescricaoDaVaga.mp3"></audio>
+<audio id="audio2File" src="AudioHG/HG-DesempenhoPDI.mp3"></audio>
+<audio id="audio3File" src="AudioHG/HG-AgroDataLake.mp3"></audio>
+<audio id="audio4File" src="AudioHG/ERP-AnalyticsDeObra.mp3"></audio>
+<audio id="audio5File" src="AudioHG/ERP-CRM.mp3"></audio>
+<audio id="audio6File" src="AudioHG/ERP-GestaoDeSafras.mp3"></audio>
+<audio id="audio7File" src="AudioHG/ERP-InsightsERP.mp3"></audio>
+<audio id="audio8File" src="AudioHG/ERP-AnalyticsERP.mp3"></audio>
+<audio id="audio9File" src="AudioHG/ERP-MarketingIntelligence.mp3"></audio>
+<audio id="audio10File" src="AudioHG/Log-AI-Logistics.mp3"></audio>
+<audio id="audio11File" src="AudioHG/Log-PlataformaDeFretes.mp3"></audio>
+<audio id="audio12File" src="AudioHG/HCM-AderenciaSugerida.mp3"></audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Elementos do áudio do diretor
+    const directorIcon = document.getElementById('directorIcon');
+    const directorAudio = document.getElementById('directorAudio');
+
+    // Controle de áudio do diretor
+    directorIcon.addEventListener('click', () => {
+        console.log("Clicou no ícone do diretor!");
+        if (directorAudio.paused) {
+            console.log("Reproduzindo áudio do diretor...");
+            directorAudio.play().catch(error => console.error("Erro ao reproduzir áudio do diretor:", error));
+        } else {
+            console.log("Pausando áudio do diretor...");
+            directorAudio.pause();
+            directorAudio.currentTime = 0;
+        }
+    });
+
+    // Função para parar todos os áudios
+    function stopAllAudio() {
+        const audios = document.querySelectorAll('audio');
+        audios.forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    }
+
+    // Controle dos áudios da playlist
+    for (let i = 1; i <= 12; i++) {
+        const audioButton = document.getElementById('audio' + i);
+        const audioElement = document.getElementById('audio' + i + 'File');
+
+        audioButton.addEventListener('click', () => {
+            stopAllAudio(); // Parar qualquer áudio que esteja tocando antes de começar outro
+            if (audioElement.paused) {
+                console.log("Reproduzindo áudio:", i);
+                audioElement.play().catch(error => console.error("Erro ao reproduzir áudio " + i + ":", error));
+            } else {
+                console.log("Pausando áudio:", i);
+                audioElement.pause();
+                audioElement.currentTime = 0;
+            }
+        });
+    }
+});
+</script>
 
 
 
@@ -159,7 +264,6 @@
             <a href="https://materiais.senior.com.br/hrassist?utm_campaign=mkt_redes_sociais_hcm&utm_source=linkedin&utm_medium=social&utm_content=redes_hrbp" target="_blank">Conheça a HR Assist</a>
             <br>
             <a href="https://www.senior.com.br/blog/divulgacao-de-vagas-estrategias-para-atrair-talentos" target="_blank">Estratégia para Atrair Talentos</a>
-        </p>
         </div>
         <!-- Imagens à direita -->
         <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
@@ -173,7 +277,7 @@
                 <i class="fas fa-volume-up"></i> Ouvir descrição
             </button>
             <!-- Elemento de áudio -->
-            <audio id="audioDescription" src="images/1-audio-descricao-da-vaga.mp3"></audio>
+            <audio id="audioDescription" src="AudioHG/HG-DescricaoDaVaga-RH.mp3"></audio>
         </div>
     </div>
 </div>
@@ -184,67 +288,71 @@
 </div>
 
 <script>
-    // Variáveis de imagens
-    const images = [
-        "images/recruta4.png",
-        "images/1-ia-img-recruta-descricao.png",
-        "images/recruta3.png",
-        "images/1-ia-img-recruta-descricao-infografico.png",
-        "images/recruta5.png"
-    ];
+    document.addEventListener("DOMContentLoaded", function() {
+        // Variáveis de imagens
+        const images = [
+            "images/recruta4.png",
+            "images/1-ia-img-recruta-descricao.png",
+            "images/recruta3.png",
+            "images/1-ia-img-recruta-descricao-infografico.png",
+            "images/recruta5.png"
+        ];
+        let currentImageIndex = 0;
 
-    let currentImageIndex = 0;
+        // Elementos do DOM
+        const expandImage = document.getElementById('expandImage');
+        const modalImage = document.getElementById('modalImage');
+        const nextImageButton = document.getElementById('nextImageButton');
+        const imageModal = document.getElementById('imageModal');
+        const audioButton = document.getElementById('audioButton');
+        const audioDescription = document.getElementById('audioDescription');
 
-    // Elementos do DOM
-    const expandImage = document.getElementById('expandImage');
-    const modalImage = document.getElementById('modalImage');
-    const prevImageButton = document.getElementById('prevImageButton');
-    const nextImageButton = document.getElementById('nextImageButton');
+        // Alternar estado de exibição do modal ao clicar na imagem
+        expandImage.addEventListener('click', () => {
+            if (imageModal.style.display === 'none' || imageModal.style.display === '') {
+                imageModal.style.display = 'flex';
+                modalImage.src = expandImage.src;
+            } else {
+                imageModal.style.display = 'none';
+            }
+        });
 
-    // Alternar estado de exibição do modal ao clicar na imagem
-    expandImage.addEventListener('click', () => {
-        if (imageModal.style.display === 'none' || imageModal.style.display === '') {
-            imageModal.style.display = 'flex';
-            modalImage.src = expandImage.src;
-        } else {
+        // Fechar o modal ao clicar na imagem expandida
+        modalImage.addEventListener('click', () => {
             imageModal.style.display = 'none';
+        });
+
+        // Fechar o modal ao clicar fora da imagem
+        imageModal.addEventListener('click', (event) => {
+            if (event.target === imageModal) { // Garante que o clique foi no fundo do modal, não na imagem
+                imageModal.style.display = 'none';
+            }
+        });
+
+        // Trocar a imagem ao clicar na seta direita
+        nextImageButton.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length; // Avança no array
+            updateImage();
+        });
+
+        // Atualiza a imagem na tela e no modal
+        function updateImage() {
+            expandImage.src = images[currentImageIndex];
+            modalImage.src = expandImage.src;
         }
-    });
 
-    // Fechar o modal ao clicar na imagem expandida
-    modalImage.addEventListener('click', () => {
-        imageModal.style.display = 'none';
-    });
-
-    // Trocar a imagem para a PRÓXIMA ao clicar na seta direita
-    nextImageButton.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex + 1) % images.length; // Avança no array
-        updateImage();
-    });
-
-    // Trocar a imagem para a ANTERIOR ao clicar na seta esquerda
-    prevImageButton.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length; // Volta no array
-        updateImage();
-    });
-
-    // Atualiza a imagem na tela e no modal
-    function updateImage() {
-        expandImage.src = images[currentImageIndex];
-        modalImage.src = expandImage.src;
-    }
-
-
-    // Reproduzir ou pausar o áudio ao clicar no botão
-    audioButton.addEventListener('click', () => {
-        if (audioDescription.paused) {
-            audioDescription.play();
-        } else {
-            audioDescription.pause();
-            audioDescription.currentTime = 0;
-        }
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play();
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
     });
 </script>
+
 
 
 
@@ -267,12 +375,20 @@
             <p>Procurando impulsionar a carreira, com a ferramenta de Inteligência Artificial do IAssist, você recebe sugestões de objetivos e ações mediante a definição de uma ou mais competências para montar seu PDI.</p>
             <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8061&idcatalogo=4076&idcurso=12639&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
             <p><a href="https://platform.senior.com.br/senior-x/#/Gest%C3%A3o%20de%20Pessoas%20%7C%20HCM/2/43c072c8-de8c-4c4c-81b8-5d383daa8dcd%2FGest%C3%A3o%20de%20desempenho%2FMeu%20desempenho%2FMeu%20PDI?category=frame&link=https:%2F%2Fhcm.senior.com.br%2F%23%2Femployee-management%2Findividual-development-goal%3Fexpand%3Dp%26role%3DEMPLOYEE&helpUrl=https:%2F%2Fdocumentacao.senior.com.br%2Fseniorxplatform%2Fmanual-do-usuario%2Fhcm%2F%23gestao-desempenho%2Fgestao-de-desempenho.htm&helpContext=&r=1" target="_blank">Demonstre na prática para o seu cliente</a></p>
-            
-        
         </div>
-        <!-- Imagem à direita -->
-        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
             <img id="toggleImage" src="images/pdi-v-final.gif" alt="Plano de Desenvolvimento Individual" style="width: 100%; max-width: 500px; height: auto; cursor: pointer;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButton" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
+
+            <!-- Elemento de áudio -->
+            <audio id="audioDescription" src="AudioHG/HG-GDesempenho.mp3"></audio>
         </div>
     </div>
 </div>
@@ -281,6 +397,26 @@
 <div id="imageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; z-index: 1000;">
     <img id="modalImage" src="" alt="Imagem expandida" style="max-width: 90%; max-height: 90%; cursor: pointer;">
 </div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButton');
+        const audioDescription = document.getElementById('audioDescription');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play();
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -311,172 +447,375 @@
         });
     });
 </script>
+
+
        
         
-
-        <div class="modal_item">
-            <div class="modal_item_header" style="background:#1E9988;">
-                HCM
-                <img src="images/icon-erp.svg" alt="Ícone ERP">
-                <div class="modal_item_header_close"></div>
-            </div>
-            <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
-                <!-- Texto à esquerda -->
-                <div style="flex: 2;">
-                    <h2>[ERP] I.A - AgrodataLake: Centralizando informações de mercado para decisões inteligentes</h2>
-                    <br>
-                    <p>A capacidade de tomar decisões com base em dados é fundamental para o sucesso das empresas na atualidade, incluindo o setor do Agronegócio.</p>
-                    <p>Como base nesta afirmação, apresentamos o <strong>Agro DataLake</strong>, um recurso centralizado projetado para a consulta de informações relacionadas ao Agronegócio. Este sistema inovador busca dados provenientes de várias fontes, consolidando-os em um único local. Esse processo simplificado facilita significativamente a tomada de decisões pelas empresas, proporcionando uma visão holística e integrada para orientar estrategicamente suas ações.</p>
-                    <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8054&idcatalogo=4076&idcurso=12632&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
-                </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img src="images/3-ia-plataforma-fretes.png" alt="Descrição de vaga" style="width: 100%; max-width: 500px; height: auto;">
-                </div>
-            </div>
+<div class="modal_item">
+    <div class="modal_item_header" style="background:#1E9988;">
+        HCM
+        <img src="images/icon-erp.svg" alt="Ícone ERP">
+        <div class="modal_item_header_close"></div>
+    </div>
+    <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Texto à esquerda -->
+        <div style="flex: 2;">
+            <h2>[ERP] I.A - AgrodataLake: Centralizando informações de mercado para decisões inteligentes</h2>
+            <br>
+            <p>A capacidade de tomar decisões com base em dados é fundamental para o sucesso das empresas na atualidade, incluindo o setor do Agronegócio.</p>
+            <p>Como base nesta afirmação, apresentamos o <strong>Agro DataLake</strong>, um recurso centralizado projetado para a consulta de informações relacionadas ao Agronegócio. Este sistema inovador busca dados provenientes de várias fontes, consolidando-os em um único local. Esse processo simplificado facilita significativamente a tomada de decisões pelas empresas, proporcionando uma visão holística e integrada para orientar estrategicamente suas ações.</p>
+            <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8054&idcatalogo=4076&idcurso=12632&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
         </div>
+        
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
+            <img src="images/3-ia-plataforma-fretes.png" alt="Descrição de vaga" style="width: 100%; max-width: 500px; height: auto;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButtonAgrodataLake" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
 
-
-        <div class="modal_item">
-            <div class="modal_item_header" style="background:#1E9988;">
-                Gestão Empresarial | ERP
-                <img src="images/icon-erp.svg">
-                <div class="modal_item_header_close"></div>
-            </div>
-            <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
-                <!-- Texto à esquerda -->
-                <div style="flex: 2;">
-                    <h2>[ERP] I.A - Como o Analytics de Obra pode tornar a tomada de decisão mais rápida e assertiva</h2>
-                    <br>
-                    <p>O <strong>Analytics de Obra</strong> é uma ferramenta que fornece ao responsável pela obra uma gestão eficiente, ágil e precisa em uma única tela, detalhando os processos da obra, controlando os custos e prazos através da evolução do orçamento, evitando assim desperdícios e imprevistos.</p>
-                    <p><strong>Resultado?</strong> Processos de gestão de obra mais rápidos e assertivos, com controle eficiente de custos e prazos.</p>
-                    <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8057&idcatalogo=4076&idcurso=12635&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
-                </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img src="images/4-ia-analytics-de-obra.png" alt="Analytics de Obra" style="width: 100%; max-width: 500px; height: auto;">
-                </div>
-            </div>
+            <!-- Elemento de áudio -->
+            <audio id="audioDescriptionAgrodataLake" src="AudioHG/HG-AgroDataLake.mp3"></audio>
         </div>
+    </div>
+</div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButtonAgrodataLake');
+        const audioDescription = document.getElementById('audioDescriptionAgrodataLake');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
+
+
+<div class="modal_item">
+    <div class="modal_item_header" style="background:#1E9988;">
+        Gestão Empresarial | ERP
+        <img src="images/icon-erp.svg">
+        <div class="modal_item_header_close"></div>
+    </div>
+    <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Texto à esquerda -->
+        <div style="flex: 2;">
+            <h2>[ERP] I.A - Como o Analytics de Obra pode tornar a tomada de decisão mais rápida e assertiva</h2>
+            <br>
+            <p>O <strong>Analytics de Obra</strong> é uma ferramenta que fornece ao responsável pela obra uma gestão eficiente, ágil e precisa em uma única tela, detalhando os processos da obra, controlando os custos e prazos através da evolução do orçamento, evitando assim desperdícios e imprevistos.</p>
+            <p><strong>Resultado?</strong> Processos de gestão de obra mais rápidos e assertivos, com controle eficiente de custos e prazos.</p>
+            <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8057&idcatalogo=4076&idcurso=12635&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
+        </div>
+        
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
+            <img src="images/4-ia-analytics-de-obra.png" alt="Analytics de Obra" style="width: 100%; max-width: 500px; height: auto;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButtonAnalyticsObra" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
+
+            <!-- Elemento de áudio -->
+            <audio id="audioDescriptionAnalyticsObra" src="AudioHG/HG-AnalyticsDeObra.mp3"></audio>
+        </div>
+    </div>
+</div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButtonAnalyticsObra');
+        const audioDescription = document.getElementById('audioDescriptionAnalyticsObra');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
         
 
 
-        <div class="modal_item">
-            <div class="modal_item_header" style="background:#1E9988;">
-                Gestão Empresarial | ERP
-                <img src="images/icon-erp.svg">
-                <div class="modal_item_header_close"></div>
-            </div>
-            <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
-                <!-- Texto à esquerda -->
-                <div style="flex: 2;">
-                    <h2>[ERP] I.A - Geração de campanhas inteligentes utilizando a IA do CRM Senior</h2>
-                    <br>
-                    <p>Automatize, reduza custos e tempo de produção. Planeje, controle e explore a indústria 4.0 com MES, cloud, cybersecurity e integração entre sistemas. Ganhe eficiência e competitividade.</p>
-                    <p><strong>Resultado?</strong> Campanhas mais inteligentes e eficientes, com redução de custos e aumento de competitividade.</p>
-                    <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8058&idcatalogo=4076&idcurso=12636&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
-                </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img src="images/5-ia-crm.png" alt="Campanhas inteligentes com IA" style="width: 100%; max-width: 500px; height: auto;">
-                </div>
-            </div>
+<div class="modal_item">
+    <div class="modal_item_header" style="background:#1E9988;">
+        Gestão Empresarial | ERP
+        <img src="images/icon-erp.svg">
+        <div class="modal_item_header_close"></div>
+    </div>
+    <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Texto à esquerda -->
+        <div style="flex: 2;">
+            <h2>[ERP] I.A - Geração de campanhas inteligentes utilizando a IA do CRM Senior</h2>
+            <br>
+            <p>Automatize, reduza custos e tempo de produção. Planeje, controle e explore a indústria 4.0 com MES, cloud, cybersecurity e integração entre sistemas. Ganhe eficiência e competitividade.</p>
+            <p><strong>Resultado?</strong> Campanhas mais inteligentes e eficientes, com redução de custos e aumento de competitividade.</p>
+            <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8058&idcatalogo=4076&idcurso=12636&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
         </div>
+        
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
+            <img src="images/5-ia-crm.png" alt="Campanhas inteligentes com IA" style="width: 100%; max-width: 500px; height: auto;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButtonCrmCampaigns" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
+
+            <!-- Elemento de áudio -->
+            <audio id="audioDescriptionCrmCampaigns" src="AudioHG/HG-CRM.mp3"></audio>
+        </div>
+    </div>
+</div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButtonCrmCampaigns');
+        const audioDescription = document.getElementById('audioDescriptionCrmCampaigns');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
+
+
+<div class="modal_item">
+    <div class="modal_item_header" style="background:#1E9988;">
+        Gestão Empresarial | ERP
+        <img src="images/icon-erp.svg">
+        <div class="modal_item_header_close"></div>
+    </div>
+    <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Texto à esquerda -->
+        <div style="flex: 2;">
+            <h2>[ERP] I.A - Analisando os resultados das Safras com o Gestão Safra</h2>
+            <br>
+            <p>Como podemos analisar o resultado de uma Safra utilizando o Gestão Safra? O <strong>Gestão de Safra</strong> é uma ferramenta de análise gerencial que se baseia em informações contáveis, financeiras e operacionais, que permite dar visibilidade ao ciclo produtivo de variadas culturas. Ele apresenta informações relevantes sobre a safra, facilitando assim a tomada de decisão.</p>
+            <p><strong>Resultado?</strong> Análises mais precisas e assertivas para otimizar os processos produtivos e melhorar a gestão das safras.</p>
+            <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8055&idcatalogo=4076&idcurso=12633&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
+        </div>
+        
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
+            <img src="images/5-ia-gestao-de-safra.png" alt="Gestão Safra" style="width: 100%; max-width: 500px; height: auto;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButtonGestaoSafra" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
+
+            <!-- Elemento de áudio -->
+            <audio id="audioDescriptionGestaoSafra" src="AudioHG/HG-GestaoSafra.mp3"></audio>
+        </div>
+    </div>
+</div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButtonGestaoSafra');
+        const audioDescription = document.getElementById('audioDescriptionGestaoSafra');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
         
 
 
-        <div class="modal_item">
-            <div class="modal_item_header" style="background:#1E9988;">
-                Gestão Empresarial | ERP
-                <img src="images/icon-erp.svg">
-                <div class="modal_item_header_close"></div>
-            </div>
-            <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
-                <!-- Texto à esquerda -->
-                <div style="flex: 2;">
-                    <h2>[ERP] I.A - Analisando os resultados das Safras com o Gestão Safra</h2>
-                    <br>
-                    <p>Como podemos analisar o resultado de uma Safra utilizando o Gestão Safra? O <strong>Gestão de Safra</strong> é uma ferramenta de análise gerencial que se baseia em informações contáveis, financeiras e operacionais, que permite dar visibilidade ao ciclo produtivo de variadas culturas. Ele apresenta informações relevantes sobre a safra, facilitando assim a tomada de decisão.</p>
-                    <p><strong>Resultado?</strong> Análises mais precisas e assertivas para otimizar os processos produtivos e melhorar a gestão das safras.</p>
-                    <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8055&idcatalogo=4076&idcurso=12633&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
-                </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img src="images/5-ia-gestao-de-safra.png" alt="Gestão Safra" style="width: 100%; max-width: 500px; height: auto;">
-                </div>
-            </div>
+<div class="modal_item">
+    <div class="modal_item_header" style="background:#1E9988;">
+        Gestão Empresarial | ERP
+        <img src="images/icon-erp.svg">
+        <div class="modal_item_header_close"></div>
+    </div>
+    <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Texto à esquerda -->
+        <div style="flex: 2;">
+            <h2>[ERP] I.A - Insights ERP XT: O ERP falando com você</h2>
+            <br>
+            <p>Esta ferramenta desempenha um papel fundamental na otimização de processos e na redução de riscos operacionais. O <strong>Insight do ERP XT</strong> atua de maneira proativa, destacando pontos críticos nas rotinas administrativas e oferecendo ferramentas para aprimorar a eficiência operacional.</p>
+            <p><strong>Resultado?</strong> Processos administrativos mais ágeis e uma gestão mais eficaz com insights poderosos diretamente no seu ERP.</p>
+            <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8059&idcatalogo=4076&idcurso=12637&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
         </div>
+        
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
+            <img src="images/2-ia-img-aderencia.png" alt="Insights ERP XT" style="width: 100%; max-width: 500px; height: auto;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButtonInsightsERPXT" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
+
+            <!-- Elemento de áudio -->
+            <audio id="audioDescriptionInsightsERPXT" src="AudioHG/HG-Insights-ERP.mp3"></audio>
+        </div>
+    </div>
+</div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButtonInsightsERPXT');
+        const audioDescription = document.getElementById('audioDescriptionInsightsERPXT');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
         
 
 
-        <div class="modal_item">
-            <div class="modal_item_header" style="background:#1E9988;">
-                Gestão Empresarial | ERP
-                <img src="images/icon-erp.svg">
-                <div class="modal_item_header_close"></div>
-            </div>
-            <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
-                <!-- Texto à esquerda -->
-                <div style="flex: 2;">
-                    <h2>[ERP] I.A - Insights ERP XT: O ERP falando com você</h2>
-                    <br>
-                    <p>Esta ferramenta desempenha um papel fundamental na otimização de processos e na redução de riscos operacionais. O <strong>Insight do ERP XT</strong> atua de maneira proativa, destacando pontos críticos nas rotinas administrativas e oferecendo ferramentas para aprimorar a eficiência operacional.</p>
-                    <p><strong>Resultado?</strong> Processos administrativos mais ágeis e uma gestão mais eficaz com insights poderosos diretamente no seu ERP.</p>
-                    <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8059&idcatalogo=4076&idcurso=12637&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
-                </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img src="images/2-ia-img-aderencia.png" alt="Insights ERP XT" style="width: 100%; max-width: 500px; height: auto;">
-                </div>
-            </div>
+
+<div class="modal_item">
+    <div class="modal_item_header" style="background:#1E9988;">
+        Gestão Empresarial | ERP
+        <img src="images/icon-erp.svg">
+        <div class="modal_item_header_close"></div>
+    </div>
+    <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Texto à esquerda -->
+        <div style="flex: 2;">
+            <h2>Analytics ERP</h2>
+            <br>
+            <p><strong>Analytics ERP</strong> serve como uma central para monitorar e gerenciar sua operação. De maneira intuitiva e descomplicada, permite que os usuários-chave e gestores obtenham uma visão abrangente da saúde operacional, capacitando-os a tomar decisões ainda mais precisas.</p>
+            <p>São 8 painéis de indicadores disponibilizados para auxiliar sua gestão de Compras, Contábil, Faturamento, Financeiro, Fiscal, Gerencial, Produção e Vendas. Para cada painel, há indicadores específicos que apoiam uma gestão orientada por dados. No painel Contábil, você pode utilizar a Inteligência Artificial para te auxiliar na análise financeira.</p>
+            <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8056&idcatalogo=4076&idcurso=12634&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
         </div>
         
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
+            <img src="images/7-ia-erp.png" alt="Analytics ERP" style="width: 100%; max-width: 500px; height: auto;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButtonAnalyticsERP" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
 
-
-
-        <div class="modal_item">
-            <div class="modal_item_header" style="background:#1E9988;">
-                Gestão Empresarial | ERP
-                <img src="images/icon-erp.svg">
-                <div class="modal_item_header_close"></div>
-            </div>
-            <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
-                <!-- Texto à esquerda -->
-                <div style="flex: 2;">
-                    <h2>Analytics ERP</h2>
-                    <br>
-                    <p><strong>Analytics ERP</strong> serve como uma central para monitorar e gerenciar sua operação. De maneira intuitiva e descomplicada, permite que os usuários-chave e gestores obtenham uma visão abrangente da saúde operacional, capacitando-os a tomar decisões ainda mais precisas.</p>
-                    <p>São 8 painéis de indicadores disponibilizados para auxiliar sua gestão de Compras, Contábil, Faturamento, Financeiro, Fiscal, Gerencial, Produção e Vendas. Para cada painel, há indicadores específicos que apoiam uma gestão orientada por dados. No painel Contábil, você pode utilizar a Inteligência Artificial para te auxiliar na análise financeira.</p>
-                    <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8056&idcatalogo=4076&idcurso=12634&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
-                </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img src="images/7-ia-erp.png" alt="Analytics ERP" style="width: 100%; max-width: 500px; height: auto;">
-                </div>
-            </div>
+            <!-- Elemento de áudio -->
+            <audio id="audioDescriptionAnalyticsERP" src="AudioHG/HG-AnalyticsERP.mp3"></audio>
         </div>
+    </div>
+</div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButtonAnalyticsERP');
+        const audioDescription = document.getElementById('audioDescriptionAnalyticsERP');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
         
 
-        <div class="modal_item">
-            <div class="modal_item_header" style="background:#1E9988;">
-                Gestão Empresarial | ERP
-                <img src="images/icon-erp.svg">
-                <div class="modal_item_header_close"></div>
-            </div>
-            <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
-                <!-- Texto à esquerda -->
-                <div style="flex: 2;">
-                    <h2>[ERP] I.A - Marketing Intelligence: Transforme insights em receitas e alavanque as suas vendas</h2>
-                    <br>
-                    <p>Essa solução não só aprimora a busca pelo cliente ideal, mas também facilita a exportação de informações para ferramentas-chave, como Microsoft Excel e o CRM da Senior.</p>
-                    <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8060&idcatalogo=4076&idcurso=12638&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
-                </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                    <img src="images/8-ia-marketing-intelligence.png" alt="Marketing Intelligence" style="width: 100%; max-width: 500px; height: auto;">
-                </div>
-            </div>
+<div class="modal_item">
+    <div class="modal_item_header" style="background:#1E9988;">
+        Gestão Empresarial | ERP
+        <img src="images/icon-erp.svg">
+        <div class="modal_item_header_close"></div>
+    </div>
+    <div class="modal_item_content" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Texto à esquerda -->
+        <div style="flex: 2;">
+            <h2>[ERP] I.A - Marketing Intelligence: Transforme insights em receitas e alavanque as suas vendas</h2>
+            <br>
+            <p>Essa solução não só aprimora a busca pelo cliente ideal, mas também facilita a exportação de informações para ferramentas-chave, como Microsoft Excel e o CRM da Senior.</p>
+            <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8060&idcatalogo=4076&idcurso=12638&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
         </div>
+        
+        <!-- Imagem e botão de áudio à direita -->
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <!-- Imagem -->
+            <img src="images/8-ia-marketing-intelligence.png" alt="Marketing Intelligence" style="width: 100%; max-width: 500px; height: auto;">
+            
+            <!-- Botão de áudio -->
+            <button id="audioButtonMarketingIntelligence" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <i class="fas fa-volume-up"></i> Ouvir descrição
+            </button>
+
+            <!-- Elemento de áudio -->
+            <audio id="audioDescriptionMarketingIntelligence" src="AudioHG/HG-MarketingIntelligence.mp3"></audio>
+        </div>
+    </div>
+</div>
+
+<!-- Script para controle do áudio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const audioButton = document.getElementById('audioButtonMarketingIntelligence');
+        const audioDescription = document.getElementById('audioDescriptionMarketingIntelligence');
+
+        // Reproduzir ou pausar o áudio ao clicar no botão
+        audioButton.addEventListener('click', () => {
+            if (audioDescription.paused) {
+                audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+            } else {
+                audioDescription.pause();
+                audioDescription.currentTime = 0;
+            }
+        });
+    });
+</script>
+
         
 
 
@@ -494,12 +833,41 @@
                     <p>Veja como simplificar o acompanhamento das operações, através de dashboards visuais e análise de dados por meio de inteligência artificial. Com uma interface intuitiva, o AI Logistics é uma solução indispensável para gestores e equipes logísticas que buscam aprimorar sua eficiência e competitividade.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8064&idcatalogo=4076&idcurso=12642&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
                 </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+                
+                <!-- Imagem e botão de áudio à direita -->
+                <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                    <!-- Imagem -->
                     <img src="images/11-ai-logistics.png" alt="AI Logistics" style="width: 100%; max-width: 500px; height: auto;">
+                    
+                    <!-- Botão de áudio -->
+                    <button id="audioButtonLogistics" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        <i class="fas fa-volume-up"></i> Ouvir descrição
+                    </button>
+        
+                    <!-- Elemento de áudio -->
+                    <audio id="audioDescriptionLogistics" src="AudioHG/HG-IALogistics.mp3"></audio>
                 </div>
             </div>
         </div>
+        
+        <!-- Script para controle do áudio -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const audioButton = document.getElementById('audioButtonLogistics');
+                const audioDescription = document.getElementById('audioDescriptionLogistics');
+        
+                // Reproduzir ou pausar o áudio ao clicar no botão
+                audioButton.addEventListener('click', () => {
+                    if (audioDescription.paused) {
+                        audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+                    } else {
+                        audioDescription.pause();
+                        audioDescription.currentTime = 0;
+                    }
+                });
+            });
+        </script>
+        
         
 
 
@@ -518,12 +886,41 @@
                     <p>A Senior oferece soluções logísticas integradas e sincronizadas com seu ERP, revolucionando o agendamento de carga, eliminando erros e fraudes, e monitorando a frota em tempo real. Simplificamos a administração e aprimoramos a gestão de armazéns, garantindo precisão no estoque. Concentre-se no crescimento enquanto cuidamos dos detalhes operacionais.</p>
                     <p><a href="https://ucsonline.senior.com.br/lms/#/home/curso/?secao=8065&idcatalogo=4076&idcurso=12643&buscaSimples=true" target="_blank">Acesse o curso na UCS</a></p>
                 </div>
-                <!-- Imagem à direita -->
-                <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+                
+                <!-- Imagem e botão de áudio à direita -->
+                <div style="flex: 1; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                    <!-- Imagem -->
                     <img src="images/12-plataforma-fretes.png" alt="AI Logistics" style="width: 100%; max-width: 500px; height: auto;">
+                    
+                    <!-- Botão de áudio -->
+                    <button id="audioButtonLogisticaAI" style="margin-top: 15px; background-color: #1E9988; border: none; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                        <i class="fas fa-volume-up"></i> Ouvir descrição
+                    </button>
+        
+                    <!-- Elemento de áudio -->
+                    <audio id="audioDescriptionLogisticaAI" src="AudioHG/HG-PlataformaDeFretes.mp3"></audio>
                 </div>
             </div>
         </div>
+        
+        <!-- Script para controle do áudio -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const audioButton = document.getElementById('audioButtonLogisticaAI');
+                const audioDescription = document.getElementById('audioDescriptionLogisticaAI');
+        
+                // Reproduzir ou pausar o áudio ao clicar no botão
+                audioButton.addEventListener('click', () => {
+                    if (audioDescription.paused) {
+                        audioDescription.play().catch(error => console.error("Erro ao reproduzir áudio:", error));
+                    } else {
+                        audioDescription.pause();
+                        audioDescription.currentTime = 0;
+                    }
+                });
+            });
+        </script>
+        
   
 
         <div class="modal_item" id="recrutamentoModal">
@@ -563,7 +960,7 @@
         </div>
         <!-- Vídeo com aumento de 25% -->
         <video id="modalVideo" controls style="width: 125%; height: 125%; transition: all 0.3s;">
-            <source src="images/video-IARH.mp4" type="video/mp4">
+            <source src="videos/Video Animado HG.mp4" type="video/mp4">
             Seu navegador não suporta o elemento de vídeo.
         </video>
     </div>
