@@ -172,66 +172,77 @@
 <audio id="directorAudio" src="AudioHG/HG-Fala.mp3"></audio>
 
 <!-- Áudios da playlist -->
-<audio id="audio1File" src="AudioHG/HG-DescricaoDaVaga.mp3"></audio>
-<audio id="audio2File" src="AudioHG/HG-DesempenhoPDI.mp3"></audio>
+<audio id="audio1File" src="AudioHG/HG-DescricaoDaVaga-RH.mp3"></audio>
+<audio id="audio2File" src="AudioHG/HG-GDesempenho.mp3"></audio>
 <audio id="audio3File" src="AudioHG/HG-AgroDataLake.mp3"></audio>
 <audio id="audio4File" src="AudioHG/ERP-AnalyticsDeObra.mp3"></audio>
-<audio id="audio5File" src="AudioHG/ERP-CRM.mp3"></audio>
-<audio id="audio6File" src="AudioHG/ERP-GestaoDeSafras.mp3"></audio>
-<audio id="audio7File" src="AudioHG/ERP-InsightsERP.mp3"></audio>
-<audio id="audio8File" src="AudioHG/ERP-AnalyticsERP.mp3"></audio>
-<audio id="audio9File" src="AudioHG/ERP-MarketingIntelligence.mp3"></audio>
-<audio id="audio10File" src="AudioHG/Log-AI-Logistics.mp3"></audio>
-<audio id="audio11File" src="AudioHG/Log-PlataformaDeFretes.mp3"></audio>
-<audio id="audio12File" src="AudioHG/HCM-AderenciaSugerida.mp3"></audio>
+<audio id="audio5File" src="AudioHG/HG-CRM.mp3"></audio>
+<audio id="audio6File" src="AudioHG/HG-GestaoSafra.mp3"></audio>
+<audio id="audio7File" src="AudioHG/HG-Insights-ERP.mp3"></audio>
+<audio id="audio8File" src="AudioHG/HG-AnalyticsERP.mp3"></audio>
+<audio id="audio9File" src="AudioHG/HG-MarketingIntelligence.mp3"></audio>
+<audio id="audio10File" src="AudioHG/HG-IALogistics.mp3"></audio>
+<audio id="audio11File" src="AudioHG/HG-PlataformaDeFretes.mp3"></audio>
+<audio id="audio12File" src="AudioHG/HG-DescricaoDaVaga-RH.mp3"></audio>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Elementos do áudio do diretor
-    const directorIcon = document.getElementById('directorIcon');
-    const directorAudio = document.getElementById('directorAudio');
-
-    // Controle de áudio do diretor
-    directorIcon.addEventListener('click', () => {
-        console.log("Clicou no ícone do diretor!");
-        if (directorAudio.paused) {
-            console.log("Reproduzindo áudio do diretor...");
-            directorAudio.play().catch(error => console.error("Erro ao reproduzir áudio do diretor:", error));
-        } else {
-            console.log("Pausando áudio do diretor...");
-            directorAudio.pause();
-            directorAudio.currentTime = 0;
-        }
-    });
-
-    // Função para parar todos os áudios
-    function stopAllAudio() {
-        const audios = document.querySelectorAll('audio');
-        audios.forEach(audio => {
-            audio.pause();
-            audio.currentTime = 0;
-        });
-    }
-
-    // Controle dos áudios da playlist
-    for (let i = 1; i <= 12; i++) {
-        const audioButton = document.getElementById('audio' + i);
-        const audioElement = document.getElementById('audio' + i + 'File');
-
-        audioButton.addEventListener('click', () => {
-            stopAllAudio(); // Parar qualquer áudio que esteja tocando antes de começar outro
-            if (audioElement.paused) {
-                console.log("Reproduzindo áudio:", i);
-                audioElement.play().catch(error => console.error("Erro ao reproduzir áudio " + i + ":", error));
+    document.addEventListener('DOMContentLoaded', function () {
+        // Elementos do áudio do diretor
+        const directorIcon = document.getElementById('directorIcon');
+        const directorAudio = document.getElementById('directorAudio');
+    
+        // Variável para armazenar o áudio atualmente tocando
+        let currentAudio = null;
+    
+        // Controle de áudio do diretor
+        directorIcon.addEventListener('click', () => {
+            console.log("Clicou no ícone do diretor!");
+            
+            // Se o áudio do diretor já estiver tocando, pause
+            if (directorAudio === currentAudio) {
+                console.log("Pausando áudio do diretor...");
+                directorAudio.pause();
+                directorAudio.currentTime = 0;
+                currentAudio = null;
             } else {
-                console.log("Pausando áudio:", i);
-                audioElement.pause();
-                audioElement.currentTime = 0;
+                // Parar qualquer outro áudio antes de tocar o do diretor
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                console.log("Reproduzindo áudio do diretor...");
+                directorAudio.play().catch(error => console.error("Erro ao reproduzir áudio do diretor:", error));
+                currentAudio = directorAudio;
             }
         });
-    }
-});
-</script>
+    
+        // Controle dos áudios da playlist
+        for (let i = 1; i <= 12; i++) {
+            const audioButton = document.getElementById('audio' + i);
+            const audioElement = document.getElementById('audio' + i + 'File');
+    
+            audioButton.addEventListener('click', () => {
+                // Se o áudio já está tocando, pause
+                if (audioElement === currentAudio) {
+                    console.log("Pausando áudio:", i);
+                    audioElement.pause();
+                    audioElement.currentTime = 0;
+                    currentAudio = null;
+                } else {
+                    // Parar qualquer outro áudio antes de tocar o novo
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0;
+                    }
+                    console.log("Reproduzindo áudio:", i);
+                    audioElement.play().catch(error => console.error("Erro ao reproduzir áudio " + i + ":", error));
+                    currentAudio = audioElement;
+                }
+            });
+        }
+    });
+    </script>
+    
 
 
 
